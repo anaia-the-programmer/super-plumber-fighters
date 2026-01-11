@@ -109,6 +109,22 @@ document.querySelector('#start-btn').addEventListener('click', () => {
     const p2Config = charManager.getCharacter(p2Type);
 
     document.querySelector('#lobby-overlay').style.display = 'none';
+
+    // Update HUD Names
+    const p1Select = document.querySelector('#p1-preset');
+    const p2Select = document.querySelector('#p2-preset');
+    const p1Name = p1Select.options[p1Select.selectedIndex].text.split(' ')[0].toUpperCase();
+    // Default P2 name logic (might need adjustment if p2Select is hidden/not used in online, but safe for local)
+    let p2Name = "OPPONENT";
+    if (p2Select && p2Select.offsetParent !== null) {
+        p2Name = p2Select.options[p2Select.selectedIndex].text.split(' ')[0].toUpperCase();
+    }
+
+    const p1NameEl = document.getElementById('p1-name');
+    const p2NameEl = document.getElementById('p2-name');
+    if (p1NameEl) p1NameEl.innerText = p1Name;
+    if (p2NameEl) p2NameEl.innerText = p2Name;
+
     game.startMatch(p1Config, p2Config, mode);
 });
 
