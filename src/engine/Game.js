@@ -112,38 +112,55 @@ class Game {
     }
 
     checkCollision(attacker, defender) {
+        console.log('Checking collision...');
+        console.log('Attacker X:', attacker.attackBox.position.x, 'Width:', attacker.attackBox.width);
+        console.log('Defender X:', defender.position.x, 'Width:', defender.width);
+
         if (
             attacker.attackBox.position.x + attacker.attackBox.width >= defender.position.x &&
             attacker.attackBox.position.x <= defender.position.x + defender.width &&
             attacker.attackBox.position.y + attacker.attackBox.height >= defender.position.y &&
             attacker.attackBox.position.y <= defender.position.y + defender.height
         ) {
+            console.log('Collision Detected!');
             // attacker.isAttacking is already true if we are here, but we need to ensure not to multi-hit
             // So we use a flag or just check if it's the right "frame" conceptually. 
             // For MVP refactor:
 
             // If already hit this attack instance, return. 
             // (We need a way to track "hasHit" per attack. Adding to Fighter temporarily)
-            if (attacker.hasHit) return;
+            if (attacker.hasHit) {
+                console.log('Already hit this attack');
+                return;
+            }
 
             attacker.hasHit = true; // Needs reset on attack end
 
             const attackType = attacker.currentAttackType;
             const damage = attacker.moveSet[attackType].damage;
 
+            console.log('Dealing damage:', damage);
+
             defender.takeDamage(damage);
+            console.log('Defender Health:', defender.stats.currentHealth);
 
             // Update UI
             // TODO: Move UI updates to a UI Manager
             if (attacker === this.player) {
-                document.querySelector('#enemyHealth').style.width = defender.stats.currentHealth + '%';
+                const el = document.querySelector('#enemyHealth');
+                el.style.width = defender.stats.currentHealth + '%';
+                console.log('Updated P2 health bar width to', el.style.width);
             } else {
-                document.querySelector('#playerHealth').style.width = defender.stats.currentHealth + '%';
+                const el = document.querySelector('#playerHealth');
+                el.style.width = defender.stats.currentHealth + '%';
+                console.log('Updated P1 health bar width to', el.style.width);
             }
 
             if (defender.stats.currentHealth <= 0) {
                 this.determineWinner({ player: this.player, enemy: this.enemy });
             }
+        } else {
+            console.log('No intersection');
         }
     }
 
