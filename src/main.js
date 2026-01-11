@@ -141,8 +141,8 @@ function startGameAsHost(guestConfig) {
             right: game.input.isKeyDown('KeyD'),
             up: game.input.isKeyDown('KeyW'),
             down: game.input.isKeyDown('KeyS'),
-            attack1: game.input.isKeyDown('Space'),
-            attack2: game.input.isKeyDown('KeyF')
+            attack1: game.input.isKeyDown('KeyJ'),
+            attack2: game.input.isKeyDown('KeyK')
         };
         networkManager.send({ type: 'input', state: keys });
         originalUpdate(dt);
@@ -170,8 +170,8 @@ function startGameAsGuest(myConfig) {
             right: game.input.isKeyDown('KeyD'),
             up: game.input.isKeyDown('KeyW'),
             down: game.input.isKeyDown('KeyS'),
-            attack1: game.input.isKeyDown('Space'),
-            attack2: game.input.isKeyDown('KeyF')
+            attack1: game.input.isKeyDown('KeyJ'),
+            attack2: game.input.isKeyDown('KeyK')
         };
         networkManager.send({ type: 'input', state: keys });
         originalUpdate(dt);

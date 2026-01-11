@@ -210,5 +210,14 @@ class Game {
 
         this.player.draw(this.ctx);
         this.enemy.draw(this.ctx);
+
+        // DEBUG OVERLAY
+        this.ctx.fillStyle = 'white';
+        this.ctx.font = '20px monospace';
+        this.ctx.fillText(`P1 Health: ${this.player.stats.currentHealth}`, 10, 100);
+        this.ctx.fillText(`P2 Health: ${this.enemy.stats.currentHealth}`, 800, 100);
+        this.ctx.fillText(`P1 Pos: ${Math.floor(this.player.position.x)}, ${Math.floor(this.player.position.y)}`, 10, 130);
+        this.ctx.fillText(`P1 Atk: ${this.player.isAttacking} BoxX: ${Math.floor(this.player.attackBox.position.x)}`, 10, 160);
+        this.ctx.fillText(`P2 Pos: ${Math.floor(this.enemy.position.x)}, ${Math.floor(this.enemy.position.y)}`, 800, 130);
     }
 }

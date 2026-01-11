@@ -35,8 +35,8 @@ class InputHandler {
         bindTouch('btn-right', 'KeyD');
         bindTouch('btn-up', 'KeyW');
         bindTouch('btn-down', 'KeyS');
-        bindTouch('btn-attack1', 'Space');
-        bindTouch('btn-attack2', 'KeyF');
+        bindTouch('btn-attack1', 'KeyJ');
+        bindTouch('btn-attack2', 'KeyK');
     }
 
     isKeyDown(code) {
