@@ -13,10 +13,15 @@ class NetworkManager {
     }
 
     async init() {
-        // Dynamically import PeerJS to avoid build issues if not present?
-        // For now assuming it's available via CDN or package
-        // We might need to add it to index.html if we don't have npm
-        const { Peer } = await import('https://esm.sh/peerjs@1.5.2?bundle-deps');
+        // PeerJS provided via <script> tag in index.html
+        // const { Peer } = await import('https://esm.sh/peerjs@1.5.2?bundle-deps'); 
+        // global Peer
+
+        if (typeof Peer === 'undefined') {
+            console.error('PeerJS not loaded');
+            return;
+        }
+
         this.peer = new Peer();
 
         return new Promise((resolve) => {
