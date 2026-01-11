@@ -186,6 +186,8 @@ class Game {
         this.ctx.fillStyle = 'black';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
+
+
         // Draw Background (scaled to fit)
         if (this.background.complete) {
             this.ctx.drawImage(this.background, 0, 0, this.canvas.width, this.canvas.height);

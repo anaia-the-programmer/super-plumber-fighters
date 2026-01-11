@@ -40,6 +40,7 @@ class Fighter {
     }
 
     draw(ctx) {
+
         // Temporary Hitbox drawing
         ctx.fillStyle = this.isAttacking ? 'yellow' : 'red';
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);

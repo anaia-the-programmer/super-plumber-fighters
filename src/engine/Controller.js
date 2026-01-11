@@ -1,4 +1,4 @@
-export class Controller {
+class Controller {
     constructor() {
         this.input = {
             left: false,
@@ -15,7 +15,7 @@ export class Controller {
     }
 }
 
-export class PlayerController extends Controller {
+class PlayerController extends Controller {
     constructor(inputHandler, keyMap) {
         super();
         this.inputHandler = inputHandler;
