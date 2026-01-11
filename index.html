@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Super Plumber Fighters</title>
+    <link rel="stylesheet" href="./src/style.css">
+</head>
+
+<body>
+    <!-- Game Interface -->
+    <!-- UI Layer -->
+    <div id="ui-layer">
+        <!-- Lobby / Menu -->
+        <div id="lobby-overlay"
+            style="position: absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); display:flex; flex-direction:column; align-items:center; justify-content:center; color:white; z-index: 10;">
+            <h1>FIGHTER MAKER</h1>
+
+            <div style="display:flex; gap: 50px; margin-bottom: 20px;">
+                <!-- Player 1 Setup -->
+                <div class="p1-setup">
+                    <h2>Player 1</h2>
+                    <select id="p1-preset">
+                        <option value="mario">Mario (Balanced)</option>
+                        <option value="luigi">Luigi (Jumper)</option>
+                        <option value="spiderman">Spider-Man (Fast)</option>
+                        <option value="custom">Custom Character</option>
+                    </select>
+
+                    <div id="p1-custom" style="display:none; margin-top:10px; border:1px solid #444; padding:10px;">
+                        <label>Speed: <input type="range" min="1" max="10" value="5" id="p1-speed"></label><br>
+                        <label>Power: <input type="range" min="1" max="10" value="5" id="p1-power"></label><br>
+                        <label>Defense: <input type="range" min="1" max="10" value="5" id="p1-def"></label>
+                    </div>
+                </div>
+
+                <!-- Game Mode -->
+                <div style="display:flex; flex-direction:column; justify-content:center;">
+                    <h2>VS</h2>
+                    <select id="game-mode">
+                        <option value="ai">vs CPU</option>
+                        <option value="local">Local PvP</option>
+                        <option value="online-host">Online (Host)</option>
+                        <option value="online-join">Online (Join)</option>
+                    </select>
+
+                    <div id="online-join-ui" style="display:none; margin-top: 10px;">
+                        <input type="text" id="join-id" placeholder="Enter Host ID" style="padding:5px;">
+                    </div>
+                    <div id="online-host-ui" style="display:none; margin-top: 10px; color: yellow;">
+                        Waiting for Join...<br>
+                        ID: <span id="host-id-display">Loading...</span>
+                    </div>
+                </div>
+
+                <!-- Opponent Setup -->
+                <div class="p2-setup" id="p2-setup-container">
+                    <h2>Opponent</h2>
+                    <select id="p2-preset">
+                        <option value="luigi">Luigi</option>
+                        <option value="mario">Mario</option>
+                        <option value="spiderman">Spider-Man</option>
+                    </select>
+                </div>
+            </div>
+
+            <button id="start-btn" style="padding: 15px 40px; font-size: 20px; cursor: pointer;">FIGHT!</button>
+        </div>
+
+        <!-- HUD -->
+        <div class="health-bar-container">
+            <div class="health-bar" style="justify-content: flex-end;">
+                <div id="playerHealth" style="width: 100%;"></div>
+            </div>
+        </div>
+
+        <!-- Timer -->
+        <div id="timer">60</div>
+
+        <!-- Player 2 Health -->
+        <div class="health-bar-container">
+            <div class="health-bar">
+                <div id="enemyHealth" style="width: 100%;"></div>
+            </div>
+        </div>
+
+        <!-- Mobile Controls -->
+        <div id="mobile-controls"
+            style="display: none; position: absolute; bottom: 20px; width: 100%; justify-content: space-between; padding: 0 20px; box-sizing: border-box; touch-action: none; pointer-events: none;">
+            <!-- D-Pad -->
+            <div style="position: relative; width: 150px; height: 150px; pointer-events: auto;">
+                <div id="btn-up" class="touch-btn"
+                    style="position: absolute; top: 0; left: 50px; width: 50px; height: 50px; background: rgba(255,255,255,0.3); border-radius: 5px;">
+                </div>
+                <div id="btn-down" class="touch-btn"
+                    style="position: absolute; bottom: 0; left: 50px; width: 50px; height: 50px; background: rgba(255,255,255,0.3); border-radius: 5px;">
+                </div>
+                <div id="btn-left" class="touch-btn"
+                    style="position: absolute; top: 50px; left: 0; width: 50px; height: 50px; background: rgba(255,255,255,0.3); border-radius: 5px;">
+                </div>
+                <div id="btn-right" class="touch-btn"
+                    style="position: absolute; top: 50px; right: 0; width: 50px; height: 50px; background: rgba(255,255,255,0.3); border-radius: 5px;">
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="display: flex; gap: 20px; align-items: flex-end; pointer-events: auto;">
+                <div id="btn-attack1" class="touch-btn"
+                    style="width: 80px; height: 80px; background: rgba(255,0,0,0.5); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+                    A</div>
+                <div id="btn-attack2" class="touch-btn"
+                    style="width: 60px; height: 60px; background: rgba(0,0,255,0.5); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-bottom: 20px;">
+                    B</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="app">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <!-- Scripts (Order Matters) -->
+    <script src="./src/engine/InputHandler.js"></script>
+    <script src="./src/engine/Controller.js"></script>
+    <script src="./src/engine/Fighter.js"></script>
+    <script src="./src/engine/CharacterManager.js"></script>
+    <script src="./src/engine/NetworkManager.js"></script>
+    <script src="./src/engine/NetworkController.js"></script>
+    <script src="./src/engine/Game.js"></script>
+    <script src="./src/main.js"></script>
+</body>
+
+</html>
