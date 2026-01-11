@@ -28,7 +28,8 @@ class Fighter {
         this.attackBox = {
             position: { x: this.position.x, y: this.position.y },
             offset: { x: 0, y: 0 },
-            width: 100,
+            offset: { x: 0, y: 0 },
+            width: 180, // Made wider to ensure hits
             height: 50
         };
         this.isAttacking = false;
@@ -123,10 +124,22 @@ class Fighter {
         // Update attack box based on move
         this.attackBox.width = move.range;
 
+        // VISUAL DISTINCTION:
+        // Punch (High) vs Kick (Low)
+        if (move.type.includes('kick')) {
+            // Lower hitbox for kick
+            this.attackBox.offset.y = 50;
+        } else {
+            // Default/High hitbox for punch
+            this.attackBox.offset.y = 0;
+        }
+
         setTimeout(() => {
             this.isAttacking = false;
             this.currentAttackType = null;
             this.hasHit = false;
+            // Reset offset
+            this.attackBox.offset.y = 0;
         }, move.duration);
     }
 
