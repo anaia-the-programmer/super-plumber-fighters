@@ -49,7 +49,7 @@ class Fighter {
     }
 
     update(deltaTime, canvasHeight, controller) {
-        this.draw();
+
 
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
