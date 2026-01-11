@@ -68,20 +68,29 @@
             <button id="start-btn" style="padding: 15px 40px; font-size: 20px; cursor: pointer;">FIGHT!</button>
         </div>
 
-        <!-- HUD -->
-        <div class="health-bar-container">
-            <div class="health-bar" style="justify-content: flex-end;">
-                <div id="playerHealth" style="width: 100%;"></div>
+        <!-- HUD Top Bar -->
+        <div id="hud" style="width: 100%; display: flex; align-items: center; padding: 20px; box-sizing: border-box;">
+            <!-- Player 1 Health (Left) -->
+            <div class="health-bar-container"
+                style="width: 45%; border: 4px solid white; height: 30px; position: relative;">
+                <div
+                    style="background: red; width: 100%; height: 100%; position: absolute; top:0; left:0; z-index: -1;">
+                </div>
+                <div id="playerHealth" style="width: 100%; height: 100%; background: #818cf8;"></div>
             </div>
-        </div>
 
-        <!-- Timer -->
-        <div id="timer">60</div>
+            <!-- Timer (Center) -->
+            <div id="timer"
+                style="background-color: black; width: 60px; height: 40px; display: flex; align-items: center; justify-content: center; color: white; border: 4px solid white; font-size: 20px; font-weight: bold; margin: 0 10px;">
+                60</div>
 
-        <!-- Player 2 Health -->
-        <div class="health-bar-container">
-            <div class="health-bar">
-                <div id="enemyHealth" style="width: 100%;"></div>
+            <!-- Player 2 Health (Right) - Drains from left -->
+            <div class="health-bar-container"
+                style="width: 45%; border: 4px solid white; height: 30px; position: relative; display: flex; justify-content: flex-end;">
+                <div
+                    style="background: red; width: 100%; height: 100%; position: absolute; top:0; left:0; z-index: -1;">
+                </div>
+                <div id="enemyHealth" style="width: 100%; height: 100%; background: #4ade80;"></div>
             </div>
         </div>
 
@@ -124,14 +133,14 @@
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
 
     <!-- Scripts (Order Matters) -->
-    <script src="./src/engine/InputHandler.js?v=5"></script>
-    <script src="./src/engine/Controller.js?v=5"></script>
-    <script src="./src/engine/Fighter.js?v=5"></script>
-    <script src="./src/engine/CharacterManager.js?v=5"></script>
-    <script src="./src/engine/NetworkManager.js?v=5"></script>
-    <script src="./src/engine/NetworkController.js?v=5"></script>
-    <script src="./src/engine/Game.js?v=5"></script>
-    <script src="./src/main.js?v=5"></script>
+    <script src="./src/engine/InputHandler.js?v=6"></script>
+    <script src="./src/engine/Controller.js?v=6"></script>
+    <script src="./src/engine/Fighter.js?v=6"></script>
+    <script src="./src/engine/CharacterManager.js?v=6"></script>
+    <script src="./src/engine/NetworkManager.js?v=6"></script>
+    <script src="./src/engine/NetworkController.js?v=6"></script>
+    <script src="./src/engine/Game.js?v=6"></script>
+    <script src="./src/main.js?v=6"></script>
 </body>
 
 </html>
