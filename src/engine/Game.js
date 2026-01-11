@@ -182,16 +182,14 @@ class Game {
     }
 
     draw() {
-        // Clear screen
-        this.ctx.fillStyle = 'black';
+        // Clear screen to Gray for visibility debugging
+        this.ctx.fillStyle = '#333';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-
-
-        // Draw Background (scaled to fit)
-        if (this.background.complete) {
-            this.ctx.drawImage(this.background, 0, 0, this.canvas.width, this.canvas.height);
-        }
+        // Draw Background (scaled to fit) - DISABLED TEMPORARILY
+        // if (this.background.complete) {
+        //     this.ctx.drawImage(this.background, 0, 0, this.canvas.width, this.canvas.height);
+        // }
 
         this.player.draw(this.ctx);
         this.enemy.draw(this.ctx);
