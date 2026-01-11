@@ -47,7 +47,6 @@ class Fighter {
 
         // Draw Character Image
         if (this.image && this.image.complete) {
-            // Use simple draw for now, assuming standard one-frame sprites
             ctx.drawImage(
                 this.image,
                 this.position.x - this.offset.x,
@@ -56,9 +55,21 @@ class Fighter {
                 this.image.height * this.scale
             );
         } else {
-            // Fallback if image loading fails/pending
+            // Fallback
             ctx.fillStyle = 'red';
             ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+        }
+
+        // Draw Attack Box (Visual Feedback)
+        if (this.isAttacking) {
+            ctx.fillStyle = 'rgba(255, 255, 0, 0.5)'; // Transparent yellow
+            // Draw box in front of player
+            ctx.fillRect(
+                this.attackBox.position.x,
+                this.attackBox.position.y,
+                this.attackBox.width,
+                this.attackBox.height
+            );
         }
     }
 
