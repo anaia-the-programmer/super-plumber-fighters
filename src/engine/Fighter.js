@@ -41,12 +41,25 @@ class Fighter {
 
     draw(ctx) {
 
-        // Temporary Hitbox drawing
-        ctx.fillStyle = this.isAttacking ? 'yellow' : 'red';
-        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+        // Hitbox debug (optional, disabling for production feel)
+        // ctx.fillStyle = this.isAttacking ? 'yellow' : 'red';
+        // ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 
-        // Draw Image (Placeholder for full sprite logic)
-        // ctx.drawImage(this.image, this.position.x, this.position.y);
+        // Draw Character Image
+        if (this.image && this.image.complete) {
+            // Use simple draw for now, assuming standard one-frame sprites
+            ctx.drawImage(
+                this.image,
+                this.position.x - this.offset.x,
+                this.position.y - this.offset.y,
+                this.image.width * this.scale,
+                this.image.height * this.scale
+            );
+        } else {
+            // Fallback if image loading fails/pending
+            ctx.fillStyle = 'red';
+            ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+        }
     }
 
     update(deltaTime, canvasHeight, controller) {
