@@ -105,6 +105,13 @@ class Fighter {
         } else {
             this.velocity.y += 0.7; // Gravity
         }
+
+        // Update Attack Box Position
+        this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
+        this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
+
+        // Turn attack box based on direction (basic implementation)
+        // For now, checks are generic, but eventually we'd flip offset based on facing direction
     }
 
     attack(type) {
